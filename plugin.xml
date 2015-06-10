@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="cordova-plugin-umengautoupdate"
+        version="0.0.1">
+    <name>UmengAutoUpdatePlugin</name>
+    <description>
+        umeng auto-update for cordova plugin
+    </description>
+    <author>Mingqiang Chen</author>
+    <license>Apache 2.0 License</license>
+    <keywords>auto-update,umeng</keywords>
+    <repo>https://github.com/chenmingqiang/CordovaUmengAutoUpdatePlugin.git</repo>
+    <issue>https://github.com/chenmingqiang/CordovaUmengAutoUpdatePlugin/issues</issue>
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
+
+    <js-module src="www/UmengAutoUpdatePlugin.js" name="UmengAutoUpdatePlugin">
+        <clobbers target="window.plugins.umengAutoUpdatePlugin"/>
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="UmengAutoUpdatePlugin">
+                <param name="android-package" value="com.tulip.cordova.UmengAutoUpdatePlugin"/>
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<!--
+            <meta-data android:name="UMENG_CHANNEL" android:value="应用宝"/>
+            <meta-data android:name="UMENG_APPKEY" android:value="557537b467e58e205d00109c"/>
+			-->
+            <service android:name="com.umeng.update.net.DownloadingService" android:process=":DownloadingService" >
+            </service>
+            <activity 
+                android:name="com.umeng.update.UpdateDialogActivity"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            </activity>
+        </config-file>
+
+        <source-file src="src/android/umeng-update-v2.6.0.1.jar" target-dir="libs"></source-file>
+        <source-file src="src/android/armeabi/libbspatch.so" target-dir="libs/armeabi"></source-file>
+        <source-file src="src/android/UmengAutoUpdatePlugin.java"
+                     target-dir="src/com/tulip/cordova"></source-file>
+        <!--  drawable src/android/resources -->
+
+        <!-- drawable resource -->
+        <resource-file src="src/android/res/drawable/tb_munion_icon.xml" target="res/drawable/tb_munion_icon.xml" />
+        <resource-file src="src/android/res/drawable/tb_munion_item_selector.xml" target="res/drawable/tb_munion_item_selector.xml" />
+        <resource-file src="src/android/res/drawable/umeng_common_gradient_green.xml" target="res/drawable/umeng_common_gradient_green.xml" />
+        <resource-file src="src/android/res/drawable/umeng_common_gradient_orange.xml" target="res/drawable/umeng_common_gradient_orange.xml" />
+        <resource-file src="src/android/res/drawable/umeng_common_gradient_red.xml" target="res/drawable/umeng_common_gradient_red.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_cancel_bg_focused.xml" target="res/drawable/umeng_update_button_cancel_bg_focused.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_cancel_bg_normal.xml" target="res/drawable/umeng_update_button_cancel_bg_normal.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_cancel_bg_selector.xml" target="res/drawable/umeng_update_button_cancel_bg_selector.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_cancel_bg_tap.xml" target="res/drawable/umeng_update_button_cancel_bg_tap.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_check_selector.xml" target="res/drawable/umeng_update_button_check_selector.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_close_bg_selector.xml" target="res/drawable/umeng_update_button_close_bg_selector.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_ok_bg_focused.xml" target="res/drawable/umeng_update_button_ok_bg_focused.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_ok_bg_normal.xml" target="res/drawable/umeng_update_button_ok_bg_normal.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_ok_bg_selector.xml" target="res/drawable/umeng_update_button_ok_bg_selector.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_button_ok_bg_tap.xml" target="res/drawable/umeng_update_button_ok_bg_tap.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_dialog_bg.xml" target="res/drawable/umeng_update_dialog_bg.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_title_bg.xml" target="res/drawable/umeng_update_title_bg.xml" />
+        <resource-file src="src/android/res/drawable/umeng_update_wifi_disable.png" target="res/drawable/umeng_update_wifi_disable.png" />
+
+
+        <!-- drawable-hdpi -->
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_btn_check_off_focused_holo_light.png" target="res/drawable-hdpi/umeng_update_btn_check_off_focused_holo_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_btn_check_off_holo_light.png" target="res/drawable-hdpi/umeng_update_btn_check_off_holo_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_btn_check_off_pressed_holo_light.png" target="res/drawable-hdpi/umeng_update_btn_check_off_pressed_holo_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_btn_check_on_focused_holo_light.png" target="res/drawable-hdpi/umeng_update_btn_check_on_focused_holo_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_btn_check_on_holo_light.png" target="res/drawable-hdpi/umeng_update_btn_check_on_holo_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_btn_check_on_pressed_holo_light.png" target="res/drawable-hdpi/umeng_update_btn_check_on_pressed_holo_light.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_close_bg_normal.png" target="res/drawable-hdpi/umeng_update_close_bg_normal.png" />
+        <resource-file src="src/android/res/drawable-hdpi/umeng_update_close_bg_tap.png" target="res/drawable-hdpi/umeng_update_close_bg_tap.png" />
+
+        <!-- layout -->
+        <resource-file src="src/android/res/layout/tb_munion_aditem.xml" target="res/layout/tb_munion_aditem.xml" />
+        <resource-file src="src/android/res/layout/tb_munion_adview.xml" target="res/layout/tb_munion_adview.xml" />
+        <resource-file src="src/android/res/layout/umeng_common_download_notification.xml" target="res/layout/umeng_common_download_notification.xml" />
+        <resource-file src="src/android/res/layout/umeng_update_dialog.xml" target="res/layout/umeng_update_dialog.xml" />
+
+        <!-- layout-v9 -->
+        <resource-file src="src/android/res/layout-v9/umeng_common_download_notification.xml" target="res/layout-v9/umeng_common_download_notification.xml" />
+
+        <!-- values -->
+        <resource-file src="src/android/res/values/tb_munion_strings.xml" target="res/values/tb_munion_strings.xml" />
+        <resource-file src="src/android/res/values/umeng_common_strings.xml" target="res/values/umeng_common_strings.xml" />
+        <resource-file src="src/android/res/values/umeng_update_string.xml" target="res/values/umeng_update_string.xml" />
+
+        <!-- values-zh -->
+        <resource-file src="src/android/res/values-zh/umeng_common_strings.xml" target="res/values-zh/umeng_common_strings.xml" />
+        <resource-file src="src/android/res/values-zh/umeng_update_string.xml" target="res/values-zh/umeng_update_string.xml" />
+    </platform>
+</plugin>
