@@ -22,39 +22,40 @@ import com.umeng.update.UpdateStatus;
 //import com.tulip.doctor_appointment.R;
 
 public class UmengAutoUpdatePlugin extends CordovaPlugin {
-	private static Context mContext;
+    private static Context mContext;
 
-	@Override
-	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-		super.initialize(cordova, webView);
-		mContext = this.cordova.getActivity().getApplicationContext();
-	}
+    @Override
+    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
+        super.initialize(cordova, webView);
+        mContext = this.cordova.getActivity().getApplicationContext();
+    }
 
-	@Override
-	public boolean execute(String action, JSONArray data,
-			CallbackContext callbackContext) throws JSONException {
-		if (action.equals("update")) {
-			update();
-		}
+    @Override
+    public boolean execute(String action, JSONArray data,
+            CallbackContext callbackContext) throws JSONException {
+        if (action.equals("update")) {
+            update();
+        }
 
-		/*
-		 else if (action.equals("setDeltaUpdate")) {
-			boolean deltaUpdate = data.getBoolean(0);
-			setDeltaUpdate(deltaUpdate);
-		}
-		*/
+        /*
+         else if (action.equals("setDeltaUpdate")) {
+            boolean deltaUpdate = data.getBoolean(0);
+            setDeltaUpdate(deltaUpdate);
+        }
+        */
 
-		callbackContext.success();
-		return true;
-	}
+        callbackContext.success();
+        return true;
+    }
 
-	void update() {
-		UmengUpdateAgent.update(mContext);
-	}
+    void update() {
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.update(mContext);
+    }
 
-	/*
-	void setDeltaUpdate(boolean deletaUpdate) {
-		UmengUpdateAgent.setDeltaUpdate(deletaUpdate);
-	}
-	*/
+    /*
+    void setDeltaUpdate(boolean deletaUpdate) {
+        UmengUpdateAgent.setDeltaUpdate(deletaUpdate);
+    }
+    */
 }
