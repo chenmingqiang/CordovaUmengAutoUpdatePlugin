@@ -44,6 +44,9 @@
 
         <source-file src="src/android/umeng-update-v2.6.0.1.jar" target-dir="libs"></source-file>
         <source-file src="src/android/armeabi/libbspatch.so" target-dir="libs/armeabi"></source-file>
+        <source-file src="src/android/x86/libbspatch.so" target-dir="libs/x86"></source-file>
+        <source-file src="src/android/mips/libbspatch.so" target-dir="libs/mips"></source-file>
+        <source-file src="src/android/armeabi-v7a/libbspatch.so" target-dir="libs/armeabi-v7a"></source-file>
         <source-file src="src/android/UmengAutoUpdatePlugin.java"
                      target-dir="src/com/tulip/cordova"></source-file>
         <!--  drawable src/android/resources -->
